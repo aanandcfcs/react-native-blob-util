@@ -142,10 +142,10 @@ public class ReactNativeBlobUtil extends ReactContextBaseJavaModule {
         delegate.scanFile(pairs, callback);
     }
 
-    @ReactMethod
-    public void hash(final String path, final String algorithm, final Promise promise) {
-        delegate.hash(path, algorithm, promise);
-    }
+    // @ReactMethod
+    // public void hash(final String path, final String algorithm, final Promise promise) {
+    //     delegate.hash(path, algorithm, promise);
+    // }
 
     /**
      * @param path       Stream file path

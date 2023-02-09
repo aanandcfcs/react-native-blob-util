@@ -154,10 +154,10 @@ public class ReactNativeBlobUtil extends NativeBlobUtilsSpec {
         delegate.readFile(path, encoding, transformFile, promise);
     }
 
-    @Override
-    public void hash(String path, String algorithm, Promise promise) {
-        delegate.hash(path, algorithm, promise);
-    }
+    // @Override
+    // public void hash(String path, String algorithm, Promise promise) {
+    //     delegate.hash(path, algorithm, promise);
+    // }
 
     @Override
     public void readStream(String path, String encoding, double bufferSize, double tick, String streamId) {
