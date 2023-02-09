@@ -828,59 +828,59 @@ class ReactNativeBlobUtilFS {
         }
     }
 
-    static void hash(String path, String algorithm, Promise promise) {
-        try {
-            Map<String, String> algorithms = new HashMap<>();
+    // static void hash(String path, String algorithm, Promise promise) {
+    //     try {
+    //         Map<String, String> algorithms = new HashMap<>();
 
-            algorithms.put("md5", "MD5");
-            algorithms.put("sha1", "SHA-1");
-            algorithms.put("sha224", "SHA-224");
-            algorithms.put("sha256", "SHA-256");
-            algorithms.put("sha384", "SHA-384");
-            algorithms.put("sha512", "SHA-512");
+    //         algorithms.put("md5", "MD5");
+    //         algorithms.put("sha1", "SHA-1");
+    //         algorithms.put("sha224", "SHA-224");
+    //         algorithms.put("sha256", "SHA-256");
+    //         algorithms.put("sha384", "SHA-384");
+    //         algorithms.put("sha512", "SHA-512");
 
-            if (!algorithms.containsKey(algorithm)) {
-                promise.reject("EINVAL", "Invalid algorithm '" + algorithm + "', must be one of md5, sha1, sha224, sha256, sha384, sha512");
-                return;
-            }
+    //         if (!algorithms.containsKey(algorithm)) {
+    //             promise.reject("EINVAL", "Invalid algorithm '" + algorithm + "', must be one of md5, sha1, sha224, sha256, sha384, sha512");
+    //             return;
+    //         }
 
-            path = ReactNativeBlobUtilUtils.normalizePath(path);
+    //         path = ReactNativeBlobUtilUtils.normalizePath(path);
 
-            File file = new File(path);
+    //         File file = new File(path);
 
-            if (file.isDirectory()) {
-                promise.reject("EISDIR", "Expecting a file but '" + path + "' is a directory");
-                return;
-            }
+    //         if (file.isDirectory()) {
+    //             promise.reject("EISDIR", "Expecting a file but '" + path + "' is a directory");
+    //             return;
+    //         }
 
-            if (!file.exists()) {
-                promise.reject("ENOENT", "No such file '" + path + "'");
-                return;
-            }
+    //         if (!file.exists()) {
+    //             promise.reject("ENOENT", "No such file '" + path + "'");
+    //             return;
+    //         }
 
-            MessageDigest md = MessageDigest.getInstance(algorithms.get(algorithm));
+    //         MessageDigest md = MessageDigest.getInstance(algorithms.get(algorithm));
 
-            FileInputStream inputStream = new FileInputStream(path);
-            int chunkSize = 4096 * 256; // 1Mb
-            byte[] buffer = new byte[chunkSize];
+    //         FileInputStream inputStream = new FileInputStream(path);
+    //         int chunkSize = 4096 * 256; // 1Mb
+    //         byte[] buffer = new byte[chunkSize];
 
-            if (file.length() != 0) {
-                int bytesRead;
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    md.update(buffer, 0, bytesRead);
-                }
-            }
+    //         if (file.length() != 0) {
+    //             int bytesRead;
+    //             while ((bytesRead = inputStream.read(buffer)) != -1) {
+    //                 md.update(buffer, 0, bytesRead);
+    //             }
+    //         }
 
-            StringBuilder hexString = new StringBuilder();
-            for (byte digestByte : md.digest())
-                hexString.append(String.format("%02x", digestByte));
+    //         StringBuilder hexString = new StringBuilder();
+    //         for (byte digestByte : md.digest())
+    //             hexString.append(String.format("%02x", digestByte));
 
-            promise.resolve(hexString.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-            promise.reject("EUNSPECIFIED", e.getLocalizedMessage());
-        }
-    }
+    //         promise.resolve(hexString.toString());
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //         promise.reject("EUNSPECIFIED", e.getLocalizedMessage());
+    //     }
+    // }
 
     /**
      * Create new file at path
